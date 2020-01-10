@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.block {
+  display: block;
+  width: 50%;
+  border: none;
+  background-color: #90CAF9;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+}
+</style>
+<body>
+
+<center>
+  <h1 style="font-size:10vw"><p id="word"></p></h1>
+  <button style="font-size:4vw" class="block" onClick="window.location.reload();">New Word</button>
+</center>
+
+<script>
+
+  const url = window.location.protocol + "//" + window.location.host + "/list.json"
+
+  function getJSON(url) {
+      var resp ;
+      var xmlHttp ;
+  
+      resp  = '' ;
+      xmlHttp = new XMLHttpRequest();
+  
+      if(xmlHttp != null)
+      {
+          xmlHttp.open( "GET", url, false );
+          xmlHttp.send( null );
+          resp = xmlHttp.responseText;
+      }
+  
+      return resp ;
+  }
+
+  Array.prototype.random = function () {
+    return this[Math.floor((Math.random()*this.length))];
+  }
+
+var result;
+result = getJSON(url);
+var item = JSON.parse(result)['words'].random();
+
+document.getElementById("word").innerHTML =
+item
+</script>
+
+</body>
+</html>
